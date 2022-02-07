@@ -14,6 +14,11 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  intl: ^0.17.0
+  get: ^4.6.1
+  dio: ^4.0.4
+  syncfusion_flutter_charts: ^19.4.48+1
+
 
 dev_dependencies:
   flutter_test:
@@ -30,3 +35,8 @@ flutter:
   assets:
     # Add assets from the images directory to the application.
     - assets/images/
+
+  fonts:
+    - family: flutterfonts
+      fonts:
+        - asset: assets/fonts/flutterfonts.ttf
