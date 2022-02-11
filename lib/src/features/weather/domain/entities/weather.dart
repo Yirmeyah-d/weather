@@ -6,11 +6,12 @@ class Weather extends Equatable {
   final String description;
   final String icon;
 
-  const Weather(
-      {required this.id,
-      required this.main,
-      required this.description,
-      required this.icon});
+  const Weather({
+    required this.id,
+    required this.main,
+    required this.description,
+    required this.icon,
+  });
 
   @override
   List<Object> get props => [

@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 
-class FiveDayThreeHourData extends Equatable {
+class FiveDaysThreeHoursData extends Equatable {
   final String dateTime;
   final int temp;
 
-  const FiveDayThreeHourData({required this.dateTime, required this.temp});
+  const FiveDaysThreeHoursData({required this.dateTime, required this.temp});
 
   @override
   List<Object> get props => [
