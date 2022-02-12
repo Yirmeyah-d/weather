@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:weather/src/features/weather/presentation/views/weather_view.dart';
 import 'features/settings/settings_controller.dart';
 import 'features/settings/settings_view.dart';
 
@@ -58,6 +59,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(),
           darkTheme: ThemeData.dark(),
           themeMode: settingsController.themeMode,
+          initialRoute: "/",
 
           // Define a function to handle named routes in order to support
           // Flutter web url navigation and deep linking.
@@ -68,8 +70,10 @@ class MyApp extends StatelessWidget {
                 switch (routeSettings.name) {
                   case SettingsView.routeName:
                     return SettingsView(controller: settingsController);
+                  case WeatherView.routeName:
+                    return const WeatherView();
                   default:
-                    return SettingsView(controller: settingsController);
+                    return const WeatherView();
                 }
               },
             );
