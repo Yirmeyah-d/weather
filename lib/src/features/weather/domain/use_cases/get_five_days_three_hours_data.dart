@@ -1,4 +1,3 @@
-import 'package:equatable/equatable.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:weather/src/features/weather/domain/entities/five_days_three_hours_data.dart';
 import 'package:weather/src/features/weather/domain/repositories/weather_repository.dart';
@@ -19,11 +18,4 @@ class GetFiveDaysThreeHoursData
   }
 }
 
-class Params extends Equatable {
-  final String city;
 
-  const Params({required this.city});
-
-  @override
-  List<Object> get props => [city];
-}

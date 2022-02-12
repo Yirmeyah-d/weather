@@ -1,4 +1,3 @@
-import 'package:equatable/equatable.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:weather/src/features/weather/domain/entities/current_weather_data.dart';
 import 'package:weather/src/features/weather/domain/repositories/weather_repository.dart';
@@ -15,13 +14,4 @@ class GetCurrentWeatherData implements UseCase<CurrentWeatherData, Params> {
   Future<Either<Failure, CurrentWeatherData>> call(Params params) async {
     return await repository.getCurrentWeatherData(params.city);
   }
-}
-
-class Params extends Equatable {
-  final String city;
-
-  const Params({required this.city});
-
-  @override
-  List<Object> get props => [city];
 }
