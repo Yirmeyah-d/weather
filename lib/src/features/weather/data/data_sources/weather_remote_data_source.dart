@@ -27,21 +27,20 @@ class WeatherRemoteDataSourceImpl implements WeatherRemoteDataSource {
 
   @override
   Future<CurrentWeatherDataModel> getCurrentWeatherData(String city) async =>
-      _getCurrentWeatherDataFromUrl('$baseUrl/weather?q=$city&lang=en&$apiKey');
+      _getCurrentWeatherDataFromUrl(
+          '$baseUrl/weather?q=$city&lang=en&appid=$apiKey');
 
   @override
   Future<List<FiveDaysThreeHoursDataModel>> getFiveDaysThreeHoursData(
           String city) async =>
       _getFiveDaysThreeHoursDataFromUrl(
-          '$baseUrl/forecast?q=$city&lang=en&$apiKey');
+          '$baseUrl/forecast?q=$city&lang=en&appid=$apiKey');
 
   Future<CurrentWeatherDataModel> _getCurrentWeatherDataFromUrl(
       String url) async {
     final response = await dio.get(url);
     if (response.statusCode == 200) {
-      print(jsonDecode(response.data));
-      print(response.data);
-      return CurrentWeatherDataModel.fromJson(jsonDecode(response.data));
+      return CurrentWeatherDataModel.fromJson(response.data);
     } else {
       throw ServerException();
     }
@@ -51,7 +50,7 @@ class WeatherRemoteDataSourceImpl implements WeatherRemoteDataSource {
       String url) async {
     final response = await dio.get(url);
     if (response.statusCode == 200) {
-      return (jsonDecode(response.data) as List)
+      return (response.data['list'] as List)
           .map((country) => FiveDaysThreeHoursDataModel.fromJson(country))
           .toList();
     } else {

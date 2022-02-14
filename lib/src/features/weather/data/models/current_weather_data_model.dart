@@ -42,9 +42,8 @@ class CurrentWeatherDataModel extends CurrentWeatherData {
     return CurrentWeatherDataModel(
       coord: CoordModel.fromJson(json['coord']),
       weather: (json['weather'] as List)
-              ?.map((w) => WeatherModel.fromJson(w))
-              ?.toList() ??
-          List.empty(),
+          .map((w) => WeatherModel.fromJson(w))
+          .toList(),
       base: json['base'],
       main: MainWeatherModel.fromJson(json['main']),
       visibility: json['visibility'],

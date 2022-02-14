@@ -7,8 +7,11 @@ import 'package:weather/src/features/weather/domain/use_cases/get_five_days_thre
 import '../../../../core/use_cases/use_cases.dart';
 import '../../domain/entities/current_weather_data.dart';
 
+enum WeatherState { INITIAL, LOADING, ERROR, SUCCESS }
+
 class WeatherController extends GetxController {
   String city;
+  var weatherState = WeatherState.INITIAL;
   final GetCurrentWeatherData getCurrentWeatherData;
   final GetFiveDaysThreeHoursData getFiveDaysThreeHoursData;
 
@@ -23,23 +26,26 @@ class WeatherController extends GetxController {
   });
 
   @override
-  void onInit() {
-    updateWeather();
-    getTopFiveCities();
+  void onInit() async {
+    await updateWeather();
+    await getTopFiveCities();
     super.onInit();
   }
 
   Future<void> updateWeather() async {
+    weatherState = WeatherState.LOADING;
+    update();
     final failureOrCurrentWeatherData =
         await getCurrentWeatherData(Params(city: city));
+
     failureOrCurrentWeatherData.fold(
       (failure) {
+        weatherState = WeatherState.ERROR;
         print(failure.mapFailureToMessage);
         update();
       },
       (currentWeatherData) {
         this.currentWeatherData = currentWeatherData;
-        update();
       },
     );
 
@@ -47,23 +53,24 @@ class WeatherController extends GetxController {
         await getFiveDaysThreeHoursData(Params(city: city));
     failureOrFiveDaysThreeHoursData.fold(
       (failure) {
+        weatherState = WeatherState.ERROR;
         print(failure.mapFailureToMessage);
         update();
       },
       (fiveDaysThreeHoursData) {
         this.fiveDaysThreeHoursData = fiveDaysThreeHoursData;
-        update();
       },
     );
   }
 
-  void getTopFiveCities() {
+  Future<void> getTopFiveCities() async {
     List<String> cities = ['London', 'New York', 'Paris', 'Moscow', 'Tokyo'];
     cities.forEach((c) async {
       final failureOrCurrentWeatherData =
           await getCurrentWeatherData(Params(city: c));
       failureOrCurrentWeatherData.fold(
         (failure) {
+          weatherState = WeatherState.ERROR;
           print(failure.mapFailureToMessage);
           update();
         },
@@ -73,5 +80,7 @@ class WeatherController extends GetxController {
         },
       );
     });
+    weatherState = WeatherState.SUCCESS;
+    update();
   }
 }
