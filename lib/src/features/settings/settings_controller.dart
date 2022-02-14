@@ -7,6 +7,8 @@ import 'settings_service.dart';
 ///
 /// Controllers glue Data Services to Flutter Widgets. The SettingsController
 /// uses the SettingsService to store and retrieve user settings.
+///
+//TODO : refactoring into getX version using GetBuilder or GetX widgets.
 class SettingsController with ChangeNotifier {
   SettingsController(this._settingsService);
 

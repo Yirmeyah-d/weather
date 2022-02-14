@@ -9,6 +9,8 @@ import 'package:weather/src/features/weather/presentation/controllers/weather_co
 import '../../domain/entities/current_weather_data.dart';
 
 class WeatherView extends StatelessWidget {
+  //TODO : clean the view by refactoring some parts and implementing some new functionality
+  //TODO : adding some animation
   const WeatherView({Key? key}) : super(key: key);
   static const routeName = '/';
 
