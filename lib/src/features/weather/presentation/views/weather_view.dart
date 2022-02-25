@@ -4,7 +4,6 @@ import 'package:weather/src/features/weather/presentation/components/components.
 import 'package:weather/src/features/weather/presentation/controllers/weather_controller.dart';
 
 class WeatherView extends StatelessWidget {
-  //TODO : Implementing some new functionality
   //TODO : adding some animation
   const WeatherView({Key? key}) : super(key: key);
   static const routeName = '/';
