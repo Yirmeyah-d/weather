@@ -6,7 +6,7 @@ import 'package:weather/src/features/weather/presentation/controllers/weather_co
 
 class WeatherView extends StatelessWidget {
   //TODO : Implementing some new functionality
-  //TODO : Adding some animation
+  //TODO : adding some animation
   const WeatherView({Key? key}) : super(key: key);
   static const routeName = '/';
 
