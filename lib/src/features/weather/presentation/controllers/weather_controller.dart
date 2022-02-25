@@ -32,6 +32,11 @@ class WeatherController extends GetxController {
     super.onInit();
   }
 
+  void updateCity(String newCity) {
+    city = newCity;
+    update();
+  }
+
   Future<void> updateWeather() async {
     weatherState = WeatherState.LOADING;
     update();
