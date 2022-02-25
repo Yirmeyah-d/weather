@@ -10,19 +10,29 @@ class FiveDaysThreeHoursDataModel extends FiveDaysThreeHoursData {
         );
 
   factory FiveDaysThreeHoursDataModel.fromJson(Map<String, dynamic> json) {
-    var f = json['dt_txt'].split(' ')[0].split('-')[2];
-    var l = json['dt_txt'].split(' ')[1].split(':')[0];
-    var fandl = '$f-$l';
     return FiveDaysThreeHoursDataModel(
-      dateTime: fandl,
+      dateTime: json['dt_txt'],
       temp: (double.parse(json['main']['temp'].toString()) - 273.15).round(),
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'dateTime': dateTime,
-      'temp': temp,
+      'dt_txt': dateTime,
+      'main': {
+        'temp': temp,
+      }
     };
+  }
+
+  factory FiveDaysThreeHoursDataModel.timestampToDateTime(
+      FiveDaysThreeHoursDataModel fiveDaysThreeHoursDataModel) {
+    var f = fiveDaysThreeHoursDataModel.dateTime.split(' ')[0].split('-')[2];
+    var l = fiveDaysThreeHoursDataModel.dateTime.split(' ')[1].split(':')[0];
+    var dateTime = '$f-$l';
+    return FiveDaysThreeHoursDataModel(
+      dateTime: dateTime,
+      temp: (fiveDaysThreeHoursDataModel.temp - 273.15).round(),
+    );
   }
 }

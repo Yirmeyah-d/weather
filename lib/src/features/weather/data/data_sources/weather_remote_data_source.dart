@@ -51,7 +51,8 @@ class WeatherRemoteDataSourceImpl implements WeatherRemoteDataSource {
     final response = await dio.get(url);
     if (response.statusCode == 200) {
       return (response.data['list'] as List)
-          .map((country) => FiveDaysThreeHoursDataModel.fromJson(country))
+          .map((fiveDaysThreeHoursData) =>
+              FiveDaysThreeHoursDataModel.fromJson(fiveDaysThreeHoursData))
           .toList();
     } else {
       throw ServerException();

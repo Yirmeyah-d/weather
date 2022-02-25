@@ -19,8 +19,8 @@ class MainWeatherModel extends MainWeather {
 
   factory MainWeatherModel.fromJson(Map<String, dynamic> json) {
     return MainWeatherModel(
-      temp: json['temp'],
-      feelsLike: double.parse(json['feels_like'].toString()),
+      temp: json['temp'].toDouble(),
+      feelsLike: json['feels_like'],
       tempMin: json['temp_min'].toDouble(),
       tempMax: json['temp_max'].toDouble(),
       pressure: json['pressure'],
@@ -31,9 +31,9 @@ class MainWeatherModel extends MainWeather {
   Map<String, dynamic> toJson() {
     return {
       'temp': temp,
-      'feelsLike': feelsLike,
-      'tempMin': tempMin,
-      'tempMax': tempMax,
+      'feels_like': feelsLike,
+      'temp_min': tempMin,
+      'temp_max': tempMax,
       'pressure': pressure,
       'humidity': humidity,
     };

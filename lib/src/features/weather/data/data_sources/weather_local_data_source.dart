@@ -65,8 +65,8 @@ class WeatherLocalDataSourceImpl implements WeatherLocalDataSource {
         sharedPreferences.getStringList(CACHED_FIVE_DAYS_THREE_HOURS_DATA);
     if (jsonFiveDaysThreeHoursDataList != null) {
       return Future.value(jsonFiveDaysThreeHoursDataList
-          .map((country) =>
-              FiveDaysThreeHoursDataModel.fromJson(jsonDecode(country)))
+          .map((fiveDaysThreeHoursData) => FiveDaysThreeHoursDataModel.fromJson(
+              jsonDecode(fiveDaysThreeHoursData)))
           .toList());
     } else {
       throw CacheException();
@@ -76,13 +76,15 @@ class WeatherLocalDataSourceImpl implements WeatherLocalDataSource {
   @override
   Future<void> cacheFiveDaysThreeHoursData(
       List<FiveDaysThreeHoursDataModel> fiveDaysThreeHoursDataToCache) {
-    List<String> countryListEncoded = fiveDaysThreeHoursDataToCache
-        .map((country) => jsonEncode(country.toJson()))
-        .toList();
+    List<String> fiveDaysThreeHoursDataListEncoded =
+        fiveDaysThreeHoursDataToCache
+            .map((fiveDaysThreeHoursData) =>
+                jsonEncode(fiveDaysThreeHoursData.toJson()))
+            .toList();
 
     return sharedPreferences.setStringList(
       CACHED_FIVE_DAYS_THREE_HOURS_DATA,
-      countryListEncoded,
+      fiveDaysThreeHoursDataListEncoded,
     );
   }
 }

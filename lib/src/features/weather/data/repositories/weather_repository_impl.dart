@@ -8,6 +8,7 @@ import 'package:weather/src/features/weather/domain/repositories/weather_reposit
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/network/network_info.dart';
+import '../models/five_days_three_hours_data_model.dart';
 
 class WeatherRepositoryImpl implements WeatherRepository {
   final WeatherRemoteDataSource remoteDataSource;
@@ -48,8 +49,13 @@ class WeatherRepositoryImpl implements WeatherRepository {
       getFiveDaysThreeHoursData(String city) async {
     if (await networkInfo.isConnected) {
       try {
-        final remoteFiveDaysThreeHoursData =
+        final remoteFiveDaysThreeHoursDataToCache =
             await remoteDataSource.getFiveDaysThreeHoursData(city);
+        final remoteFiveDaysThreeHoursData = remoteFiveDaysThreeHoursDataToCache
+            .map((fiveDaysThreeHoursData) =>
+                FiveDaysThreeHoursDataModel.timestampToDateTime(
+                    fiveDaysThreeHoursData))
+            .toList();
         localDataSource
             .cacheFiveDaysThreeHoursData(remoteFiveDaysThreeHoursData);
         return Right(remoteFiveDaysThreeHoursData);
