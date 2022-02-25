@@ -72,4 +72,11 @@ class WeatherRepositoryImpl implements WeatherRepository {
       }
     }
   }
+
+  @override
+  Future<List<String>> getCities() async {
+      final cityList =
+          await localDataSource.getCities();
+      return cityList;
+  }
 }

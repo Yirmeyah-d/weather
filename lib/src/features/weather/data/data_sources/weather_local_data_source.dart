@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/services.dart';
 import 'package:weather/src/features/weather/data/models/current_weather_data_model.dart';
 import 'package:weather/src/features/weather/data/models/five_days_three_hours_data_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -28,6 +29,10 @@ abstract class WeatherLocalDataSource {
   ///
   Future<void> cacheFiveDaysThreeHoursData(
       List<FiveDaysThreeHoursDataModel> fiveDaysThreeHoursDataToCache);
+
+  /// Gets the local Json file which contain the city list
+  ///
+  Future<List<String>> getCities();
 }
 
 const CACHED_CURRENT_WEATHER_DATA = 'CACHED_CURRENT_WEATHER_DATA';
@@ -86,5 +91,14 @@ class WeatherLocalDataSourceImpl implements WeatherLocalDataSource {
       CACHED_FIVE_DAYS_THREE_HOURS_DATA,
       fiveDaysThreeHoursDataListEncoded,
     );
+  }
+
+  Future<List<String>> getCities() async {
+    var jsonCityList =
+        await rootBundle.loadString('assets/jsons/city_list.json');
+
+    return Future.value((jsonDecode(jsonCityList) as List)
+        .map((e) => e["name"] as String)
+        .toList());
   }
 }

@@ -1,6 +1,7 @@
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:weather/src/core/utils/failure_api.dart';
 import 'package:weather/src/features/weather/domain/entities/five_days_three_hours_data.dart';
+import 'package:weather/src/features/weather/domain/use_cases/get_cities.dart';
 import 'package:weather/src/features/weather/domain/use_cases/get_current_weather_data.dart';
 import 'package:weather/src/features/weather/domain/use_cases/get_five_days_three_hours_data.dart';
 
@@ -14,20 +15,22 @@ class WeatherController extends GetxController {
   var weatherState = WeatherState.INITIAL;
   final GetCurrentWeatherData getCurrentWeatherData;
   final GetFiveDaysThreeHoursData getFiveDaysThreeHoursData;
-
+  final GetCities getCities;
   CurrentWeatherData? currentWeatherData;
   List<CurrentWeatherData> currentWeatherDataList = [];
   List<FiveDaysThreeHoursData> fiveDaysThreeHoursData = [];
-
+  List<String> cities = [];
   WeatherController({
     required this.city,
     required this.getCurrentWeatherData,
     required this.getFiveDaysThreeHoursData,
+    required this.getCities,
   });
 
   @override
   void onInit() async {
     await updateWeather();
+    await getCityList();
     await getTopFiveCities();
     super.onInit();
   }
@@ -42,7 +45,6 @@ class WeatherController extends GetxController {
     update();
     final failureOrCurrentWeatherData =
         await getCurrentWeatherData(Params(city: city));
-
     failureOrCurrentWeatherData.fold(
       (failure) {
         weatherState = WeatherState.ERROR;
@@ -51,6 +53,8 @@ class WeatherController extends GetxController {
       },
       (currentWeatherData) {
         this.currentWeatherData = currentWeatherData;
+        weatherState = WeatherState.SUCCESS;
+        update();
       },
     );
 
@@ -64,8 +68,14 @@ class WeatherController extends GetxController {
       },
       (fiveDaysThreeHoursData) {
         this.fiveDaysThreeHoursData = fiveDaysThreeHoursData;
+        weatherState = WeatherState.SUCCESS;
+        update();
       },
     );
+  }
+
+  Future<void> getCityList() async {
+    cities = await getCities(NoParams());
   }
 
   Future<void> getTopFiveCities() async {

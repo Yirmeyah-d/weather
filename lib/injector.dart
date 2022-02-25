@@ -7,6 +7,7 @@ import 'package:weather/src/features/weather/data/data_sources/weather_local_dat
 import 'package:weather/src/features/weather/data/data_sources/weather_remote_data_source.dart';
 import 'package:weather/src/features/weather/data/repositories/weather_repository_impl.dart';
 import 'package:weather/src/features/weather/domain/repositories/weather_repository.dart';
+import 'package:weather/src/features/weather/domain/use_cases/get_cities.dart';
 import 'package:weather/src/features/weather/domain/use_cases/get_current_weather_data.dart';
 import 'package:weather/src/features/weather/domain/use_cases/get_five_days_three_hours_data.dart';
 import 'package:flutter/material.dart';
@@ -16,14 +17,18 @@ Future<void> init() async {
   //! Features - Weather
 
   // Controller
-  Get.lazyPut(() => WeatherController(
-      city: '京都市',
-      getCurrentWeatherData: Get.find<GetCurrentWeatherData>(),
-      getFiveDaysThreeHoursData: Get.find<GetFiveDaysThreeHoursData>()));
+  Get.lazyPut(
+    () => WeatherController(
+        city: 'Poissy',
+        getCurrentWeatherData: Get.find<GetCurrentWeatherData>(),
+        getFiveDaysThreeHoursData: Get.find<GetFiveDaysThreeHoursData>(),
+        getCities: Get.find<GetCities>()),
+  );
 
   // Use Cases
   Get.lazyPut(() => GetCurrentWeatherData(Get.find<WeatherRepository>()));
   Get.lazyPut(() => GetFiveDaysThreeHoursData(Get.find<WeatherRepository>()));
+  Get.lazyPut(() => GetCities(Get.find<WeatherRepository>()));
 
   // Data Sources
   Get.lazyPut<WeatherRemoteDataSource>(

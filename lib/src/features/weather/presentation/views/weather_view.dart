@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
-import 'package:intl/intl.dart';
 import 'package:weather/src/features/weather/presentation/components/components.dart';
 import 'package:weather/src/features/weather/presentation/controllers/weather_controller.dart';
 
@@ -53,8 +52,10 @@ class WeatherView extends StatelessWidget {
                           ),
                         ),
                         SearchBarComponent(
-                            onSubmitted: controller.updateWeather,
-                            onChanged: controller.updateCity),
+                          onSubmitted: controller.updateWeather,
+                          onChanged: controller.updateCity,
+                          cities: controller.cities,
+                        ),
                         CustomDashboardCardComponent(
                             cardContent: controller.currentWeatherData)
                       ],

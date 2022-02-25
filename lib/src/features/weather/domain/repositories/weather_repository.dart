@@ -9,4 +9,5 @@ abstract class WeatherRepository {
       String city);
   Future<Either<Failure, List<FiveDaysThreeHoursData>>>
       getFiveDaysThreeHoursData(String city);
+  Future<List<String>> getCities();
 }
