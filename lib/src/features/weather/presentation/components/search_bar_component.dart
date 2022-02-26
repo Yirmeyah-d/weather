@@ -3,14 +3,14 @@ import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:weather/src/features/weather/presentation/controllers/weather_controller.dart';
 
 class SearchBarComponent extends StatelessWidget {
-  final Future<void> Function() onSubmitted;
-  final Function onChanged;
+  final Future<void> Function(String city) onSubmitted;
+  //final Function onChanged;
   final List<String> cities;
   final TextEditingController _typeAheadController = TextEditingController();
 
   SearchBarComponent({
     required this.onSubmitted,
-    required this.onChanged,
+    // required this.onChanged,
     required this.cities,
     Key? key,
   }) : super(key: key);
@@ -72,8 +72,8 @@ class SearchBarComponent extends StatelessWidget {
         },
         onSuggestionSelected: (suggestion) {
           _typeAheadController.text = suggestion as String;
-          onChanged(suggestion);
-          onSubmitted();
+          // onChanged(suggestion);
+          onSubmitted(suggestion);
         },
       ),
     );

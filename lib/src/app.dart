@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:weather/src/features/weather/presentation/views/weather_view.dart';
 import 'features/settings/settings_controller.dart';
 import 'features/settings/settings_view.dart';
+import 'features/weather/presentation/views/weather_view_v2.dart';
 
 /// The Widget that configures your application.
 class MyApp extends StatelessWidget {
@@ -71,9 +71,9 @@ class MyApp extends StatelessWidget {
                   case SettingsView.routeName:
                     return SettingsView(controller: settingsController);
                   case WeatherView.routeName:
-                    return const WeatherView();
+                    return WeatherView();
                   default:
-                    return const WeatherView();
+                    return WeatherView();
                 }
               },
             );
