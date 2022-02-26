@@ -23,7 +23,7 @@ class SearchBarComponent extends StatelessWidget {
     }
 
     matches.retainWhere((s) => s.toLowerCase().contains(query.toLowerCase()));
-    return matches;
+    return matches.take(10).toList();
   }
 
   @override
