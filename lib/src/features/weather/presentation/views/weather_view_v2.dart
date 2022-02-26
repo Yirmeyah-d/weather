@@ -99,8 +99,10 @@ class WeatherView extends StatelessWidget {
                                         cardsContent: controller
                                             .currentWeatherDataList.value,
                                       ),
-                                      const LineChartCardTitleComponent(
+                                      LineChartCardTitleComponent(
                                         title: 'forcast next 5 days',
+                                        onPressed: controller.updateWeather,
+                                        city: controller.city,
                                       ),
                                       LineChartCardComponent(
                                         dataSource: controller
