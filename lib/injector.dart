@@ -11,7 +11,7 @@ import 'package:weather/src/features/weather/domain/use_cases/get_cities.dart';
 import 'package:weather/src/features/weather/domain/use_cases/get_current_weather_data.dart';
 import 'package:weather/src/features/weather/domain/use_cases/get_five_days_three_hours_data.dart';
 import 'package:flutter/material.dart';
-import 'package:weather/src/features/weather/presentation/controllers/weather_controller_v2.dart';
+import 'package:weather/src/features/weather/presentation/controller/weather_controller_v2.dart';
 
 Future<void> init() async {
   //! Features - Weather

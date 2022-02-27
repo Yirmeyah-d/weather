@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:weather/src/features/weather/presentation/components/components.dart';
-import 'package:weather/src/features/weather/presentation/controllers/weather_controller_v2.dart';
+import 'package:weather/src/features/weather/presentation/controller/weather_controller_v2.dart';
 
 class WeatherView extends StatelessWidget {
   //TODO : adding some animation
