@@ -49,10 +49,12 @@ class WeatherView extends StatelessWidget {
                                 elevation: 0,
                                 leading: IconButton(
                                   icon: const Icon(
-                                    Icons.menu,
+                                    Icons.settings,
                                     color: Colors.white,
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.pushNamed(context, '/settings');
+                                  },
                                 ),
                               ),
                               SearchBarComponent(

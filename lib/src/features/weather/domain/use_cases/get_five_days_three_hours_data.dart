@@ -4,6 +4,7 @@ import 'package:weather/src/features/weather/domain/repositories/weather_reposit
 
 import '../../../../core/error/failures.dart';
 import '../../../../core/use_cases/use_cases.dart';
+import 'package:weather/src/features/weather/domain/use_cases/get_current_weather_data.dart';
 
 class GetFiveDaysThreeHoursData
     implements UseCase<List<FiveDaysThreeHoursData>, Params> {
@@ -17,5 +18,3 @@ class GetFiveDaysThreeHoursData
     return await repository.getFiveDaysThreeHoursData(params.city);
   }
 }
-
-

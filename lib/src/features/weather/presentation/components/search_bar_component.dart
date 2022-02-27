@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
-import 'package:weather/src/features/weather/presentation/controllers/weather_controller.dart';
 
 class SearchBarComponent extends StatelessWidget {
   final Future<void> Function(String city) onSubmitted;

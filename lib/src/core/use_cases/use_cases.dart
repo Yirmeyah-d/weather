@@ -14,12 +14,3 @@ class NoParams extends Equatable {
   @override
   List<Object?> get props => [];
 }
-
-class Params extends Equatable {
-  final String city;
-
-  const Params({required this.city});
-
-  @override
-  List<Object> get props => [city];
-}
